@@ -17,7 +17,7 @@ namespace Biblioteca.Controls
     {
         public string[] Labels { get; set; }
         public SeriesCollection MonthlyChartSeries { get; set; }
-        private List<Reservas> Reservas { get; set; }
+        private List<Aeroporto> Aeroporto { get; set; }
 
 
         public LiveChart()
@@ -26,9 +26,9 @@ namespace Biblioteca.Controls
         }
 
 
-        public void FillData(List<Reservas> reservas)
+        public void FillData(List<Aeroporto> aeroporto)
         {
-            this.Reservas = reservas;
+            this.Aeroporto = aeroporto;
             this.GetMonthlyChart();
         }
 
@@ -37,9 +37,9 @@ namespace Biblioteca.Controls
             MonthlyChartSeries = new SeriesCollection();
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec" };
 
-            List<IEnumerable<Reservas>> months = new List<IEnumerable<Reservas>>();
+            List<IEnumerable<Aeroporto>> months = new List<IEnumerable<Aeroporto>>();
 
-            if (this.Reservas == null)
+            if (this.Aeroporto == null)
             {
 
                 DataContext = this;
@@ -48,7 +48,7 @@ namespace Biblioteca.Controls
 
             for (int i = 1; i < 12; i++)
             {
-                IEnumerable<Reservas> month = this.Reservas.Where(dnl => dnl.Timestamp.Month == i).ToList();
+                IEnumerable<Aeroporto> month = this.Aeroporto.Where(dnl => dnl.DataPartida.Month == i).ToList();
                 months.Add(month);
             }
 
@@ -62,7 +62,7 @@ namespace Biblioteca.Controls
 
             for (int i = 0; i < 11; i++)
             {
-                charvals.Add(this.Reservas.Count(dnl => dnl.Timestamp.Month == i + 1));
+                charvals.Add(this.Aeroporto.Count(dnl => dnl.DataPartida.Month == i + 1));
             }
 
             lineSeries.Values = charvals;

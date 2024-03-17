@@ -88,8 +88,8 @@
         <Button Height="Auto" Margin="14,219,729,175" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
             <materialDesign:PackIcon Kind="GoogleAnalytics" Height="34" Width="33"/>
         </Button>
-        <Controls:Totais x:Name="reservasTotal" HorizontalAlignment="Left" Height="136" Margin="623,2,0,0" VerticalAlignment="Top" Width="177"/>
-        <Controls:Totais x:Name="entidadesTotal" HorizontalAlignment="Left" Height="134" Margin="623,143,0,0" VerticalAlignment="Top" Width="177"/>
+        <Controls:Totais x:Name="lotacaoTotal" HorizontalAlignment="Left" Height="136" Margin="623,2,0,0" VerticalAlignment="Top" Width="177"/>
+        <Controls:Totais x:Name="descricaoTotal" HorizontalAlignment="Left" Height="134" Margin="623,143,0,0" VerticalAlignment="Top" Width="177"/>
 
     </Grid>
 </Window>
