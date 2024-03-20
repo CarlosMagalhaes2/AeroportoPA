@@ -6,19 +6,27 @@ Projeto Realizado por Carlos Magalhães, Bruno Costa e Rodrigo Silva
 
 |Campo|Tipo de Dados|Descrição|
 |---|---|---|
-|voo_id|int|Id do Voo|
-|local_partida|nvarchar(30)|Local de onde o voo parte|
-|local_chegada|nvarchar(30)|Local onde o voo chega|
-|data_partida|dateTime|Data de partida|
-|data_chegada|dateTime|Data de chegada|
-|lotacao|int|Numero de passageiros que vai no voo|
-|capacidade|int|Capacidade máxima para o voo|
-|estado|ENUM|Se o voo foi cancelado, atrasado ou normal|
-|companhia_id|int|id da companhia aérea|
+|VooId|int|Id do Voo|
+|LocalPartida|nvarchar(30)|Local de onde o voo parte|
+|LocalChegada|nvarchar(30)|Local onde o voo chega|
+|DataPartida|dateTime|Data de partida|
+|DataChegada|dateTime|Data de chegada|
+|Lotacao|int|Numero de passageiros que vai no voo|
+|Capacidade|int|Capacidade máxima para o voo|
+|Estado|ENUM|Se o voo foi cancelado, atrasado ou normal|
+|CompanhiaId|int|id da companhia aérea|
 
 #### Tabela Companhia
 
 |Campo|Tipo de Dados|Descrição|
 |---|---|---|
-|companhia_id|int|id da companhia aérea|
-|descricao|nvarchar(30)|Nome da companhia|
+|CompanhiaId|int|id da companhia aérea|
+|Descricao|nvarchar(30)|Nome da companhia|
+
+### ENUM Estado
+
+|Numero|Valor|Descrição|
+|---|---|---|
+|0|Normal|O voo correu normalmente|
+|1|Atrasado|O voo está atrasado|
+|2|Cancelado|O voo foi cancelado|
