@@ -101,7 +101,7 @@ namespace CamadaDados
             }
             catch (Exception ex)
             {
-            
+
             }
             return dataTable;
         }
@@ -164,9 +164,11 @@ namespace CamadaDados
                 sqlCommand.Dispose();
                 sqlConnection.Close();
             }
+
+
             catch (Exception ex)
             {
-                
+
             }
             return dataTable;
         }
