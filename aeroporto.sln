@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31229.75
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNS", "Biblioteca\SNS.csproj", "{17F7793E-142F-4CBF-8B45-C2B9E9640407}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeroporto", "Biblioteca\Aeroporto.csproj", "{17F7793E-142F-4CBF-8B45-C2B9E9640407}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CamadaDados", "CamadaDados\CamadaDados.csproj", "{F284D542-9FFB-42ED-8151-8B4B275A7A3A}"
 EndProject
