@@ -141,8 +141,7 @@ namespace CamadaNegocios
                         aeroporto.Capacidade = dataRow.Field<int>("Capacidade");
                         aeroporto.TipoEstado = (TipoEstado)dataRow.Field<int>("Estado");
                         aeroporto.CompanhiaId = dataRow.Field<int>("CompanhiaId");
-                        aeroporto.Descricao = dataRow.Field<string>("Descricao");
-
+                        //aeroporto.Descricao = dataRow.Field<string>("Descricao"); TODO : Problem with the table because descricao isn't in the Voo table
                         this.Add(aeroporto);
                     }
                 }
