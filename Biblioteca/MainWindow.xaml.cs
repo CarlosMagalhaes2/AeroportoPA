@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using CamadaNegocios;
 using LiveCharts;
-using static CamadaNegocios.Reservas;
+using static CamadaNegocios.Aeroporto;
 
 
 namespace Biblioteca
@@ -15,9 +15,9 @@ namespace Biblioteca
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ChartValues<int> Reservastotal { get; set; }
-        public ListaReservas ListaTotal { get; set; }
-        public int contagemReservas { get; set; }
+        public ChartValues<int> Aeroportototal { get; set; }
+        public ListaAeroporto ListaTotal { get; set; }
+        public int contagemAeroporto { get; set; }
         public int contagementidades { get; set; }
   
 
@@ -42,7 +42,7 @@ namespace Biblioteca
 
         private void Init()
         {
-            this.Reservastotal = new ChartValues<int> { };
+            this.Aeroportototal = new ChartValues<int> { };
             this.ObterDownloads();
             this.refreshData();
         }
@@ -56,10 +56,10 @@ namespace Biblioteca
 
         private void ObterDownloads()
         {
-            ListaReservas listaReservas = Reservas.ObterListaReservas();
-            if (listaReservas != null)
+            ListaAeroporto listaAeroporto = Aeroporto.ObterListaAeroporto();
+            if (listaAeroporto != null)
             {
-                this.ListaTotal = listaReservas;
+                this.ListaTotal = listaAeroporto;
             }
         }
 
@@ -70,33 +70,33 @@ namespace Biblioteca
             DateTime? dataFim = this.DataFim.SelectedDate;
 
 
-            List<Reservas> filtroreservas = new List<Reservas>();
+            List<Aeroporto> filtroaeroporto = new List<Aeroporto>();
 
 
             if (dataInicio.HasValue && dataFim.HasValue && dataInicio <= dataFim)
             {
-                filtroreservas = (
+                filtroaeroporto = (
                     from d in this.ListaTotal
-                    where (d.Timestamp >= dataInicio.Value) && (d.Timestamp <= dataFim.Value)
+                    where (d.DataPartida >= dataInicio.Value) && (d.DataChegada <= dataFim.Value)
                     select d).ToList();
             }
-            monthlyChartData.FillData(filtroreservas);
-            GetTotals(filtroreservas);
+            monthlyChartData.FillData(filtroaeroporto);
+            GetTotals(filtroaeroporto);
             DataContext = this;
         }
 
         
 
-        private void GetTotals(List<Reservas> filtroreservas)
+        private void GetTotals(List<Aeroporto> filtroaeroporto)
         {
-            this.contagemReservas = filtroreservas?.Count() ?? 0;
-            this.contagementidades = filtroreservas?.Select(x => x.Entidade).Distinct().Count() ?? 0;
+            this.contagemAeroporto = filtroaeroporto?.Count() ?? 0;
+            this.contagementidades = filtroaeroporto?.Select(x => x.Descricao).Distinct().Count() ?? 0;
 
-            TotalReservas reservasTotais = new TotalReservas("Reservas", this.contagemReservas.ToString());
-            this.reservasTotal.DataContext = reservasTotais;
+            TotalAeroporto aeroportoTotais = new TotalAeroporto("Aeroporto", this.contagemAeroporto);
+            this.lotacaoTotal.DataContext = aeroportoTotais;
 
-            TotalReservas contadorTotalApps = new TotalReservas("Entidades", this.contagementidades.ToString());
-            this.entidadesTotal.DataContext = contadorTotalApps;
+            TotalAeroporto contadorTotalApps = new TotalAeroporto("Descricao", this.contagementidades);
+            this.descricaoTotal.DataContext = contadorTotalApps;
         }
 
         private void SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

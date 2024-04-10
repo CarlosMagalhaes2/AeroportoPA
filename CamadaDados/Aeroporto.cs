@@ -13,7 +13,7 @@ namespace CamadaDados
     {
         #region Métodos
 
-        public static bool ObterVoo(int vooId, ref string localPartida, ref string localChegada, ref DateTime dataPartida, ref DateTime dataChegada, ref int lotacao, ref int capacidade, ref int estado, ref int companhiaId)
+        public static bool ObterVoo(int vooId, ref string localPartida, ref string localChegada, ref DateTime dataPartida, ref DateTime dataChegada, ref int lotacao, ref int capacidade, ref int tipoEstado, ref int companhiaId, ref string descricao)
         {
             bool ok = false;
 
@@ -59,11 +59,15 @@ namespace CamadaDados
                     }
                     if (!sqlDataReader.IsDBNull(7))
                     {
-                        estado = sqlDataReader.GetInt32(7);
+                        tipoEstado = sqlDataReader.GetInt32(7);
                     }
                     if (!sqlDataReader.IsDBNull(8))
                     {
                         companhiaId = sqlDataReader.GetInt32(8);
+                    }
+                    if (!sqlDataReader.IsDBNull(9))
+                    {
+                        descricao = sqlDataReader.GetString(9);
                     }
                     ok = true;
                 }
