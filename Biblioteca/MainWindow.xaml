@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Biblioteca"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     xmlns:Controls="clr-namespace:Biblioteca.Controls" x:Class="Biblioteca.MainWindow"
+     xmlns:Controls="clr-namespace:Biblioteca.Controls"
+    xmlns:Gauges="clr-namespace:Wpf.Gauges" 
+    xmlns:hc="https://handyorg.github.io/handycontrol" 
+    x:Class="Biblioteca.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None"
+        Title="MainWindow" Height="553" Width="1106" AllowsTransparency="True" WindowStyle="None"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
@@ -15,8 +18,8 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="87" Background="#FF292929">
+    <Grid Margin="4,-1,-4,1">
+        <StackPanel HorizontalAlignment="Left" Height="552" VerticalAlignment="Center" Width="87" Background="#FF292929">
             <Button Height="56" Margin="14,20,16,0" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
                 <materialDesign:PackIcon Kind="HamburgerMenu" Height="34" Width="33"/>
             </Button>
@@ -24,11 +27,11 @@
 
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Left" Height="300" Margin="87,0,0,0" VerticalAlignment="Top" Width="713" Background="White">
+        <StackPanel HorizontalAlignment="Left" Height="406" Margin="87,0,0,0" VerticalAlignment="Top" Width="719" Background="White">
             <Controls:LiveChart x:Name="monthlyChartData" Height="355" Margin="0,0,167,0"/>
 
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="145" Margin="87,305,0,0" VerticalAlignment="Top" Width="713" Background="#FFB2AEAE">
+        <StackPanel HorizontalAlignment="Left" Height="145" Margin="89,406,0,0" VerticalAlignment="Top" Width="713" Background="#FFB2AEAE">
             <Border VerticalAlignment="Top" Margin="362,10,10,10" Height="116">
                 <Grid ShowGridLines="False" Margin="-318,0,10,10">
                     <Grid.ColumnDefinitions>
@@ -79,17 +82,23 @@
 
 
 
-        <Button Height="Auto" Margin="14,357,729,37" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto" Click="Button_Click">
+        <Button Height="Auto" Margin="12,404,1038,93" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto" Click="Button_Click">
             <materialDesign:PackIcon Kind="ExitToApp" Height="29" Width="30"/>
         </Button>
-        <Button Height="Auto" Margin="14,120,729,274" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
+        <Button Height="Auto" Margin="16,156,1034,341" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
             <materialDesign:PackIcon Kind="User" Height="34" Width="33"/>
         </Button>
-        <Button Height="Auto" Margin="14,219,729,175" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
+        <Button Height="Auto" Margin="15,283,1035,214" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
             <materialDesign:PackIcon Kind="GoogleAnalytics" Height="34" Width="33"/>
         </Button>
-        <Controls:Totais x:Name="lotacaoTotal" HorizontalAlignment="Left" Height="136" Margin="623,2,0,0" VerticalAlignment="Top" Width="177"/>
-        <Controls:Totais x:Name="descricaoTotal" HorizontalAlignment="Left" Height="134" Margin="623,143,0,0" VerticalAlignment="Top" Width="177"/>
+        
+        <Controls:Totais x:Name="lotacaoTotal" HorizontalAlignment="Left" Height="136" Margin="521,257,0,0" VerticalAlignment="Top" Width="281"/>
+        <Controls:Totais x:Name="totaisControl" TotalCompanhias="{Binding totalCompanhias}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Margin="141,260,0,0"/>
+        <Controls:PieChart HorizontalAlignment="Left" Margin="904,219,0,0" VerticalAlignment="Top" Height="165" Width="197"/>
+        
+
+        <Gauges:AngularGaugeExmple Margin="888,-34,-16,384"/>
+        <TextBox x:Name="cartaoTextBox" HorizontalAlignment="Left" Margin="816,411,0,0" VerticalAlignment="Top" Width="271" Height="128" IsReadOnly="True" TextWrapping="Wrap"/>
 
     </Grid>
 </Window>

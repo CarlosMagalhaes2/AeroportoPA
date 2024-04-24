@@ -1,33 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Biblioteca.Controls
 {
-    /// <summary>
-    /// Interaction logic for Totais.xaml
-    /// </summary>
     public partial class Totais : UserControl
     {
+        public static readonly DependencyProperty TotalCompanhiasProperty =
+            DependencyProperty.Register("TotalCompanhias", typeof(int), typeof(Totais), new PropertyMetadata(0));
+
+        public int TotalCompanhias
+        {
+            get { return (int)GetValue(TotalCompanhiasProperty); }
+            set { SetValue(TotalCompanhiasProperty, value); }
+        }
+
         public Totais()
         {
             InitializeComponent();
-        }
-
-        public static implicit operator Totais(int v)
-        {
-            throw new NotImplementedException();
+            DataContext = this;
         }
     }
 }

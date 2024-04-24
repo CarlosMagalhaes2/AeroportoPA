@@ -12,7 +12,7 @@ namespace CamadaDados
 
         internal static SqlConnection OpenDatabase()
         {
-            SqlConnection sqlConnection = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=DESKTOP-3I392D0\\SQLEXPRESS");
+            SqlConnection sqlConnection = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=DESKTOP-F0PVMIJ");
             sqlConnection.Open();
 
             return sqlConnection;
