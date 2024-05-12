@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CamadaDados", "CamadaDados\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CamadaNegocios", "CamadaNegocios\CamadaNegocios.csproj", "{B4E4FE85-86C2-46C9-8B50-9FB8E56BDFC8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C4012AFB-65CA-41BF-8670-B61742FC2EBE}"
+	ProjectSection(SolutionItems) = preProject
+		Program.cs = Program.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -177,6 +177,29 @@ namespace CamadaDados
             return dataTable;
         }
 
+        public static DataTable ObterLocaisPartidaFromDatabase()
+        {
+            DataTable dataTable = new DataTable();
+
+           
+            string connectionString = "YourConnectionStringHere";
+            string query = "SELECT DISTINCT LocalPartida FROM Voos";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+                }
+            }
+
+            return dataTable;
+        }
+
         #endregion
     }
 }

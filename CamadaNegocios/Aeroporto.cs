@@ -26,14 +26,14 @@ namespace CamadaNegocios
             get { return localChegada; }
             set { localChegada = value; }
         }
-        
-        private string localPartida;
 
+        private string localPartida;
         public string LocalPartida
         {
             get { return localPartida; }
             set { localPartida = value; }
         }
+
 
         private DateTime dataPartida;
         public DateTime DataPartida
@@ -82,6 +82,13 @@ namespace CamadaNegocios
         {
             get { return descricao; }
             set { descricao = value; }
+        }
+
+        private string companhiaAerea;
+        public string CompanhiaAerea
+        {
+            get { return companhiaAerea; }
+            set { companhiaAerea = value; }
         }
 
         #endregion
@@ -141,23 +148,29 @@ namespace CamadaNegocios
                         aeroporto.Capacidade = dataRow.Field<int>("Capacidade");
                         aeroporto.TipoEstado = (TipoEstado)dataRow.Field<int>("Estado");
                         aeroporto.CompanhiaId = dataRow.Field<int>("CompanhiaId");
-                        //aeroporto.Descricao = dataRow.Field<string>("Descricao"); TODO : Problem with the table because descricao isn't in the Voo table
                         this.Add(aeroporto);
                     }
                 }
             }
 
 
-
-
         }
+
         public static ListaAeroporto ObterListaAeroporto()
         {
             DataTable dataTable = CamadaDados.Aeroporto.ListarVoos();
-
             ListaAeroporto entradas = new ListaAeroporto(dataTable);
-
             return entradas;
+        }
+
+
+        public static Dictionary<TipoEstado, int> ContarVoosPorEstado()
+        {
+            DataTable dataTable = CamadaDados.Aeroporto.ListarVoos();
+            var contagem = dataTable.AsEnumerable()
+                .GroupBy(row => row.Field<int>("Estado"))
+                .ToDictionary(group => (TipoEstado)group.Key, group => group.Count());
+            return contagem;
         }
 
         #endregion

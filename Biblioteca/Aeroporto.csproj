@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HandyControl, Version=3.4.0.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\HandyControls.3.4.5\lib\net472\HandyControl.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -69,7 +72,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AngularGaugeExmple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LiveChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PieChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,8 +96,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\AngularGaugeExmple.xaml.cs">
+      <DependentUpon>AngularGaugeExmple.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LiveChart.xaml.cs">
       <DependentUpon>LiveChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PieChart.xaml.cs">
+      <DependentUpon>PieChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Totais.xaml.cs">
       <DependentUpon>Totais.xaml</DependentUpon>

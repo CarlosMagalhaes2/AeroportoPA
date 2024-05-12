@@ -7,37 +7,27 @@ using CamadaNegocios;
 using LiveCharts;
 using static CamadaNegocios.Aeroporto;
 
-
 namespace Biblioteca
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+ 
     public partial class MainWindow : Window
     {
         public ChartValues<int> Aeroportototal { get; set; }
         public ListaAeroporto ListaTotal { get; set; }
-        public int contagemAeroporto { get; set; }
-        public int contagementidades { get; set; }
-  
-
+        public int totalVoos { get; set; }
+        public double mediaLotacao { get; set; }
+        public string CartaoTexto { get; set; }
 
         public MainWindow()
         {
-
-
             InitializeComponent();
             MouseDown += Window_MouseDown;
-
             this.DataInicio.SelectedDate = DateTime.Today.AddYears(-5);
-
             this.DataFim.SelectedDate = DateTime.Today.AddYears(-2);
-
             this.DataInicio.SelectedDateChanged += SelectedDateChanged;
-
             this.DataFim.SelectedDateChanged += SelectedDateChanged;
-
             Init();
+            ExibirCartaoNaTextBox();
         }
 
         private void Init()
@@ -53,7 +43,6 @@ namespace Biblioteca
                 DragMove();
         }
 
-
         private void ObterDownloads()
         {
             ListaAeroporto listaAeroporto = Aeroporto.ObterListaAeroporto();
@@ -63,15 +52,11 @@ namespace Biblioteca
             }
         }
 
-
         private void refreshData()
         {
             DateTime? dataInicio = this.DataInicio.SelectedDate;
             DateTime? dataFim = this.DataFim.SelectedDate;
-
-
             List<Aeroporto> filtroaeroporto = new List<Aeroporto>();
-
 
             if (dataInicio.HasValue && dataFim.HasValue && dataInicio <= dataFim)
             {
@@ -81,22 +66,15 @@ namespace Biblioteca
                     select d).ToList();
             }
             monthlyChartData.FillData(filtroaeroporto);
-            GetTotals(filtroaeroporto);
+            CalcularTotaisEmedia(filtroaeroporto);
+            ExibirCartaoNaTextBox();
             DataContext = this;
         }
 
-        
-
-        private void GetTotals(List<Aeroporto> filtroaeroporto)
+        private void CalcularTotaisEmedia(List<Aeroporto> filtroaeroporto)
         {
-            this.contagemAeroporto = filtroaeroporto?.Count() ?? 0;
-            this.contagementidades = filtroaeroporto?.Select(x => x.Descricao).Distinct().Count() ?? 0;
-
-            TotalAeroporto aeroportoTotais = new TotalAeroporto("Aeroporto", this.contagemAeroporto);
-            this.lotacaoTotal.DataContext = aeroportoTotais;
-
-            TotalAeroporto contadorTotalApps = new TotalAeroporto("Descricao", this.contagementidades);
-            this.descricaoTotal.DataContext = contadorTotalApps;
+            this.totalVoos = filtroaeroporto?.Count() ?? 0;
+            this.mediaLotacao = filtroaeroporto.Any() ? filtroaeroporto.Average(a => a.Lotacao) : 0;
         }
 
         private void SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -104,8 +82,21 @@ namespace Biblioteca
             refreshData();
         }
 
+        private void ExibirCartaoNaTextBox()
+        {
+            this.CartaoTexto = ObterTextoDoCartao(this.totalVoos, this.mediaLotacao);
+         
+            cartaoTextBox.Text = this.CartaoTexto;
+        }
 
-
+        private string ObterTextoDoCartao(int totalVoos, double mediaLotacao)
+        {
+            return $"Cartão de Visualização de Dados:\n" +
+                   $"--------------------------------\n" +
+                   $"Total de Voos: {totalVoos}\n" +
+                   $"Média de Lotação dos Voos: {mediaLotacao.ToString("0.00")}\n" +
+                   $"--------------------------------";
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
