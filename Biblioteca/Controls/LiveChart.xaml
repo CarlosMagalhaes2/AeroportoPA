@@ -14,7 +14,7 @@
                 </lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Meses" Labels="{Binding Labels}" />
+                <lvc:Axis Title="Meses" Labels="{Binding Labels}" LabelsRotation="75" />
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
     </Grid>

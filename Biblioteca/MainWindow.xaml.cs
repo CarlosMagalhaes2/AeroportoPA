@@ -34,7 +34,7 @@ namespace Biblioteca
         {
             this.Aeroportototal = new ChartValues<int> { };
             this.ObterDownloads();
-            this.refreshData();
+            this.RefreshData();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -52,23 +52,26 @@ namespace Biblioteca
             }
         }
 
-        private void refreshData()
+        private void RefreshData()
         {
             DateTime? dataInicio = this.DataInicio.SelectedDate;
             DateTime? dataFim = this.DataFim.SelectedDate;
-            List<Aeroporto> filtroaeroporto = new List<Aeroporto>();
 
             if (dataInicio.HasValue && dataFim.HasValue && dataInicio <= dataFim)
             {
+                List<Aeroporto> filtroaeroporto = new List<Aeroporto>();
+                
                 filtroaeroporto = (
                     from d in this.ListaTotal
                     where (d.DataPartida >= dataInicio.Value) && (d.DataChegada <= dataFim.Value)
                     select d).ToList();
+                
+                monthlyChartData.FillData(filtroaeroporto);
+                CalcularTotaisEmedia(filtroaeroporto);
+                ExibirCartaoNaTextBox();
+                DataContext = this;
             }
-            monthlyChartData.FillData(filtroaeroporto);
-            CalcularTotaisEmedia(filtroaeroporto);
-            ExibirCartaoNaTextBox();
-            DataContext = this;
+           
         }
 
         private void CalcularTotaisEmedia(List<Aeroporto> filtroaeroporto)
@@ -79,7 +82,7 @@ namespace Biblioteca
 
         private void SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            refreshData();
+            this.RefreshData();
         }
 
         private void ExibirCartaoNaTextBox()
