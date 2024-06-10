@@ -20,79 +20,81 @@ namespace Biblioteca.Controls
         public SeriesCollection MonthlyChartSeries { get; set; }
         private List<Aeroporto> Aeroporto { get; set; }
 
-
         public LiveChart()
         {
             InitializeComponent();
         }
 
-
-        public void FillData(List<Aeroporto> aeroporto)
+        public void FillData(List<Aeroporto> aeroporto, string localPartida)
         {
             this.Aeroporto = aeroporto;
-            this.GetMonthlyChart();
+            this.GetMonthlyChart(localPartida);
         }
 
-        private void GetMonthlyChart()
+        private void GetMonthlyChart(string localPartida)
         {
             MonthlyChartSeries = new SeriesCollection();
-            Labels = new[] { "Jan1", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec" };
-            
-            //List<IEnumerable<Aeroporto>> months = new List<IEnumerable<Aeroporto>>();
 
             if (this.Aeroporto == null)
             {
-
                 DataContext = this;
                 return;
             }
 
-            //for (int i = 1; i < 12; i++)
-            //{
-            //    IEnumerable<Aeroporto> month = this.Aeroporto.Where(dnl => dnl.DataPartida.Month == i).ToList();
-            //    months.Add(month);
-            //}
             List<string> labels = new List<string>();
-            ChartValues<int> charvals = new ChartValues<int>();
+            ChartValues<int> charvalsChegadas = new ChartValues<int>();
+            ChartValues<int> charvalsPartidas = new ChartValues<int>();
 
             DateTime minDate = this.Aeroporto.Min(k => k.DataPartida);
             DateTime maxDate = this.Aeroporto.Max(k => k.DataPartida);
 
-            for (DateTime date = minDate; date <=maxDate; date = date.AddMonths(1))
+            for (DateTime date = minDate; date <= maxDate; date = date.AddMonths(1))
             {
-                labels.Add(date.Year.ToString() + "-" + date.Month.ToString());
-                charvals.Add(this.Aeroporto.Count(dnl => dnl.DataPartida.Month == date.Month && dnl.DataPartida.Year == date.Year));
+                labels.Add(date.ToString("MMM yyyy"));
+                charvalsChegadas.Add(this.Aeroporto.Count(dnl => dnl.DataPartida.Month == date.Month && dnl.DataPartida.Year == date.Year && dnl.LocalChegada == localPartida));
+                charvalsPartidas.Add(this.Aeroporto.Count(dnl => dnl.DataPartida.Month == date.Month && dnl.DataPartida.Year == date.Year && dnl.LocalPartida == localPartida));
             }
 
-            LineSeries lineSeries = new LineSeries();
-            lineSeries.Title = "Total Partidas";
-            lineSeries.DataLabels = true;
-            lineSeries.Stroke = Brushes.Gray;
-            lineSeries.Fill = Brushes.LightBlue;
-            lineSeries.Configuration = new CartesianMapper<Point>();
+            LineSeries lineSeriesChegadas = new LineSeries
+            {
+                Title = "Total Chegadas",
+                DataLabels = true,
+                Stroke = Brushes.RoyalBlue,
+                Fill = Brushes.Transparent,
+                Values = charvalsChegadas
+            };
 
+            LineSeries lineSeriesPartidas = new LineSeries
+            {
+                Title = "Total Partidas",
+                DataLabels = true,
+                Stroke = Brushes.DarkRed,
+                Fill = Brushes.Transparent,
+                Values = charvalsPartidas
+            };
 
-
-            //for (int i = 0; i < 11; i++)
-            //{
-            //    charvals.Add(this.Aeroporto.Count(dnl => dnl.DataPartida.Month == i + 1));
-            //}
             this.Labels = labels.ToArray();
-            lineSeries.Values = charvals;
-            
-            MonthlyChartSeries.Add(lineSeries);
-            monthlyChart.Series = this.MonthlyChartSeries;
-            //Axis x = new Axis();
-            //x.Labels = labels;
-            //x.LabelsRotation
+            MonthlyChartSeries.Add(lineSeriesChegadas);
+            MonthlyChartSeries.Add(lineSeriesPartidas);
 
-            //monthlyChart.AxisX.Add(x);
+            monthlyChart.Series = this.MonthlyChartSeries;
+
+            Axis xAxis = new Axis
+            {
+                Labels = this.Labels,
+                Separator = new LiveCharts.Wpf.Separator
+                {
+                    Step = labels.Count > 18 ? Math.Ceiling(labels.Count / 18.0) : 1,
+                    IsEnabled = false
+                },
+                LabelsRotation = 45
+            };
+
+            monthlyChart.AxisX.Clear();
+            monthlyChart.AxisX.Add(xAxis);
 
             monthlyChart.Update();
             DataContext = this;
         }
-
-
-
     }
 }

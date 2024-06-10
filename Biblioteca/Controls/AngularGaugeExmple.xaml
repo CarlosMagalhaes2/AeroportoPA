@@ -12,12 +12,12 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Margin="10" Click="ChangeValueOnClick">Update</Button>
-        <lvc:AngularGauge Grid.Row="1" Value="{Binding TotalCompanhias}" FromValue="50" ToValue="250" 
+        <Button Click="ChangeValueOnClick" Height="19" Width="45" HorizontalAlignment="Left" Margin="84,27,0,0" Grid.Row="1" VerticalAlignment="Top">Update</Button>
+        <lvc:AngularGauge Value="{Binding TotalCompanhias}" FromValue="50" ToValue="250" 
                           LabelsStep="50" TicksStep="25" Wedge="300"
                           TicksForeground="White" Foreground="White" 
                           FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5">
+                          SectionsInnerRadius=".5" Margin="0,10,-37,0" Grid.RowSpan="2">
             <lvc:AngularGauge.Sections>
                 <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
                 <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>

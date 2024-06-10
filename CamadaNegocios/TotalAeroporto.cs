@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CamadaNegocios
+﻿namespace CamadaNegocios
 {
     public class TotalAeroporto
     {
-        public TotalAeroporto(string descricao, int lotacao) {
+        public TotalAeroporto(string descricao, int lotacao)
+        {
             this.descricao = descricao;
             this.lotacao = lotacao;
         }

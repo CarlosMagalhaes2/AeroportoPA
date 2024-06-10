@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace CamadaDados
 {
@@ -12,7 +7,7 @@ namespace CamadaDados
 
         internal static SqlConnection OpenDatabase()
         {
-            SqlConnection sqlConnection = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=DESKTOP-F0PVMIJ");
+            SqlConnection sqlConnection = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Voo;Data Source=DESKTOP-DNSU1J2\\SQLEXPRESS");
             sqlConnection.Open();
 
             return sqlConnection;

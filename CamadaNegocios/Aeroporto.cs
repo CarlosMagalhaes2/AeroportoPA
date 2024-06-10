@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CamadaNegocio;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
-using CamadaNegocio;
+using System.Linq;
 
 namespace CamadaNegocios
 {
@@ -42,7 +42,7 @@ namespace CamadaNegocios
             set { dataPartida = value; }
         }
 
-         private DateTime dataChegada;
+        private DateTime dataChegada;
         public DateTime DataChegada
         {
             get { return dataChegada; }
@@ -55,7 +55,7 @@ namespace CamadaNegocios
             get { return lotacao; }
             set { lotacao = value; }
         }
-        
+
         private int capacidade;
         public int Capacidade
         {

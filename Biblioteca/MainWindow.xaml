@@ -18,7 +18,12 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid Margin="4,-1,-4,1">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="177*"/>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="912*"/>
+        </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Left" Height="552" VerticalAlignment="Center" Width="87" Background="#FF292929">
             <Button Height="56" Margin="14,20,16,0" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
                 <materialDesign:PackIcon Kind="HamburgerMenu" Height="34" Width="33"/>
@@ -27,11 +32,18 @@
 
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Left" Height="406" Margin="87,0,0,0" VerticalAlignment="Top" Width="719" Background="White">
-            <Controls:LiveChart x:Name="monthlyChartData" Height="355" Margin="0,0,167,0"/>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal"  Height="30" Margin="127,4,0,0" VerticalAlignment="Top" Width="720" Background="White" Grid.ColumnSpan="3">
+            <TextBlock FontSize="20" FontWeight="Bold" FontStretch="ExtraExpanded">Aeroporto:</TextBlock>
+            <ComboBox x:Name="LocalidadesComboBox" Margin="30,0,0,0" Width="200" SelectionChanged="LocalidadesComboBox_SelectionChanged">
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Left" Height="406" Margin="87,35,0,0" VerticalAlignment="Top" Width="720" Background="White" Grid.ColumnSpan="3">
+
+            <Controls:LiveChart x:Name="monthlyChartData" Height="355" Margin="0,0,0,0"/>
 
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="145" Margin="89,406,0,0" VerticalAlignment="Top" Width="713" Background="#FFB2AEAE">
+        <StackPanel HorizontalAlignment="Left" Height="111" Margin="89,441,0,0" VerticalAlignment="Top" Width="720" Background="#FFB2AEAE" Grid.ColumnSpan="3">
             <Border VerticalAlignment="Top" Margin="362,10,10,10" Height="116">
                 <Grid ShowGridLines="False" Margin="-318,0,10,10">
                     <Grid.ColumnDefinitions>
@@ -53,7 +65,7 @@
                         <TextBlock  Grid.Row="0" Grid.Column="0" Foreground="CadetBlue" FontWeight="Bold" Height="30" FontSize="20"/>
                     </StackPanel>
 
-                    <materialDesign:Card Padding="20" Grid.Column="0" VerticalAlignment="Center" Margin="0,9,390,0" Background="White" Height="86" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1">
+                    <materialDesign:Card Padding="20" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,390,0" Background="White" Height="86" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1">
                         <StackPanel>
                             <TextBlock FontWeight="DemiBold" Foreground="Black"><Run Text=" Escolha a Data Inicio"/></TextBlock>
                             <DatePicker FontWeight="Bold" Foreground="Black" Height="25" x:Name="DataInicio" DisplayDate="" IsDropDownOpen="False" Margin="5">
@@ -65,7 +77,7 @@
                         </StackPanel>
                     </materialDesign:Card>
 
-                    <materialDesign:Card Padding="20" Grid.Column="1" VerticalAlignment="Center" Margin="209,11,95,0" Background="White" Height="86" Grid.Row="1" Grid.RowSpan="2">
+                    <materialDesign:Card Padding="20" Grid.Column="1" VerticalAlignment="Top" Margin="232,0,71,0" Background="White" Height="86" Grid.Row="1">
                         <StackPanel>
                             <TextBlock FontWeight="DemiBold" Foreground="Black"><Run Text="Escolha a Data Final"/></TextBlock>
                             <DatePicker FontWeight="Bold" Foreground="Black" Height="25" x:Name="DataFim" DisplayDate="" IsDropDownOpen="False" Margin="5"/>
@@ -82,23 +94,23 @@
 
 
 
-        <Button Height="Auto" Margin="12,404,1038,93" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto" Click="Button_Click">
+        <Button Height="Auto" Margin="12,404,109,93" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto" Click="Button_Click">
             <materialDesign:PackIcon Kind="ExitToApp" Height="29" Width="30"/>
         </Button>
-        <Button Height="Auto" Margin="16,156,1034,341" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
+        <Button Height="Auto" Margin="16,156,105,341" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
             <materialDesign:PackIcon Kind="User" Height="34" Width="33"/>
         </Button>
-        <Button Height="Auto" Margin="15,283,1035,214" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
+        <Button Height="Auto" Margin="15,283,106,214" Style="{StaticResource ResourceKey=MaterialDesignFloatingActionButton}" Width="Auto">
             <materialDesign:PackIcon Kind="GoogleAnalytics" Height="34" Width="33"/>
         </Button>
-        
-        <Controls:Totais x:Name="lotacaoTotal" HorizontalAlignment="Left" Height="136" Margin="521,257,0,0" VerticalAlignment="Top" Width="281"/>
-        <Controls:Totais x:Name="totaisControl" TotalCompanhias="{Binding totalCompanhias}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Margin="141,260,0,0"/>
-        <Controls:PieChart HorizontalAlignment="Left" Margin="904,219,0,0" VerticalAlignment="Top" Height="165" Width="197"/>
-        
 
-        <Gauges:AngularGaugeExmple Margin="888,-34,-16,384"/>
-        <TextBox x:Name="cartaoTextBox" HorizontalAlignment="Left" Margin="816,411,0,0" VerticalAlignment="Top" Width="271" Height="128" IsReadOnly="True" TextWrapping="Wrap"/>
+        <Controls:Totais x:Name="lotacaoTotal" HorizontalAlignment="Left" Height="136" Margin="277,300,0,0" VerticalAlignment="Top" Width="Auto" Grid.Column="2"/>
+        <Controls:Totais x:Name="totaisControl" TotalCompanhias="{Binding totalCompanhias}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Margin="159,305,0,0" Grid.ColumnSpan="3"/>
+        <Controls:PieChart HorizontalAlignment="Left" Margin="666,219,0,0" VerticalAlignment="Top" Height="165" Width="197" Grid.Column="2"/>
+
+
+        <Gauges:AngularGaugeExmple Margin="576,15,0,369" Grid.Column="2"/>
+        <TextBox x:Name="cartaoTextBox" HorizontalAlignment="Left" Margin="626,411,0,0" VerticalAlignment="Top" Width="275" Height="130" IsReadOnly="True" TextWrapping="Wrap" Grid.Column="2"/>
 
     </Grid>
 </Window>
